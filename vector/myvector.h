@@ -9,9 +9,10 @@ class vector
 public:
     vector();
     ~vector();
+    bool empty();
     size_t size();
     size_t capacity();
-    void push_back(T& elem);
+    void push_back(const T& elem);
     const T& operator[](int index) const;
 private:
     T* container_;
@@ -31,6 +32,12 @@ vector<T>::~vector()
     delete[] container_;
 }
 
+template<typename T> bool
+vector<T>::empty()
+{
+    return size_ == 0 ? true : false;
+}
+
 template<typename T> size_t
 vector<T>::size()
 {
@@ -44,7 +51,7 @@ vector<T>::capacity()
 }
 
 template<typename T> void
-vector<T>::push_back(T& elem)
+vector<T>::push_back(const T& elem)
 {
     if (size_ >= max_size_)
     {
